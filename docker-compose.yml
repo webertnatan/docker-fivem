@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  apache:
+    image: httpd:2.4
+    container_name: apache
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./apache/html:/usr/local/apache2/htdocs/
+      #- ./apache/conf/httpd.conf:/usr/local/apache2/conf/httpd.conf:ro
+    networks:
+      - fivemnet
+
+  mysql:
+    image: mariadb:10.11
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: vrpex
+      TZ: America/Sao_Paulo
+    command: --sql_mode=NO_ENGINE_SUBSTITUTION
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "3306:3306"
+    depends_on:
+      - apache
+    networks:
+      - fivemnet
+
+  fivem:
+    build: ./fxserver
+    container_name: fivem
+    env_file:
+      - .env
+    stdin_open: true
+    tty: true
+    environment:
+      SERVER_ARGS: "+set txAdminEnable true +exec server.cfg +steam_webApiKey ${steamKey} +sv_licenseKey ${licenseKey}"
+    restart: always
+    working_dir: /srv
+    command: "./run.sh"
+    volumes:
+      - ./fxserver/server.cfg:/srv/server.cfg
+      - ./fxserver/resources:/srv/resources
+      - ./fxserver/cache:/srv/cache
+      - ./fxserver/config:/srv/config
+      - ./cfx-server:/srv/alpine/opt/cfx-server
+      - ./txData:/opt/cfx-server/txData
+    ports:
+      - "30120:30120/tcp"
+      - "30120:30120/udp"
+      - "40120:8006"
+    depends_on:
+      - mysql
+    networks:
+      - fivemnet
+
+volumes:
+  mysql_data:
+
+networks:
+  fivemnet:

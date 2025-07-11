@@ -1,0 +1,130 @@
+O banco de dados que você enviou (creawork.sql) tem muitas tabelas, cada uma com uma função específica. Vou te resumir de forma bem clara o que cada tabela é responsável por:
+
+✅ Tabelas principais de contas e personagens:
+
+accounts
+Armazena dados da conta dos jogadores (whitelist, prioridade, quantidade de personagens, gems, licença, Discord).
+
+characters
+Guarda informações detalhadas dos personagens (nome, idade, sexo, saldo bancário, multas, plano de saúde, etc.).
+
+banneds
+Lista de jogadores banidos (licença e tempo do banimento).
+
+✅ Tabelas relacionadas a inventário, propriedades e economia:
+
+chests
+Configuração dos baús (nome, permissão, peso máximo, slots).
+
+entitydata
+Dados genéricos (por exemplo: itens dentro dos baús, configurações de veículos, permissões, compras).
+
+playerdata
+Armazena dados individuais de cada jogador, como itens na mochila, skin, experiência em profissões, aparência.
+
+propertys
+Casas e propriedades compradas (dono, interior, chave, impostos).
+
+transactions
+Histórico de transações bancárias dos jogadores.
+
+invoices
+Faturas emitidas por compras ou serviços.
+
+taxs
+Impostos pagos.
+
+investments
+Investimentos financeiros (valor líquido, depósito, rendimento mensal).
+
+✅ Tabelas de empregos e organizações:
+
+organizations
+Cadastro de organizações (nome, saldo bancário, premium).
+
+org_transactions
+Transações feitas pelas organizações.
+
+dependents
+Dependentes vinculados a personagens.
+
+fines
+Multas aplicadas aos jogadores.
+
+prison
+Prisão de jogadores (quem prendeu, serviços a cumprir, valor da fiança).
+
+✅ Tabelas do sistema de postos de gasolina:
+
+gas_station_business
+Dados sobre o posto (estoque, dinheiro arrecadado, melhorias).
+
+gas_station_balance
+Histórico financeiro do posto.
+
+gas_station_jobs
+Missões ligadas aos postos de combustível.
+
+✅ Tabelas relacionadas ao celular (smartphone):
+
+smartphone_contacts
+Contatos salvos na agenda.
+
+smartphone_calls
+Registro de ligações feitas.
+
+smartphone_gallery
+Fotos salvas pelo jogador.
+
+smartphone_instagram, smartphone_instagram_posts, smartphone_instagram_followers, smartphone_instagram_likes, etc.
+Sistema completo de Instagram fictício.
+
+smartphone_twitter_*
+Sistema completo de Twitter fictício.
+
+smartphone_whatsapp, smartphone_whatsapp_channels, smartphone_whatsapp_messages
+Conversas e configurações do WhatsApp interno.
+
+smartphone_tinder, smartphone_tinder_messages, smartphone_tinder_rating
+Sistema Tinder fictício.
+
+smartphone_paypal_transactions
+Transações realizadas pelo PayPal fictício.
+
+smartphone_olx
+Anúncios de venda (tipo marketplace).
+
+smartphone_weazel
+Notícias e posts no Weazel News.
+
+✅ Outras tabelas específicas:
+
+hydrus_credits, hydrus_scheduler
+Créditos e agendamentos de ações automatizadas.
+
+pause_marketplace_itens, pause_shopping
+Marketplace/loja pausada e histórico de compras.
+
+races
+Dados sobre corridas realizadas pelos jogadores.
+
+reports
+Relatórios de ocorrências (talvez para uso policial/admin).
+
+port
+Portarias ou registros de entrada/saída de identidades.
+
+fidentity
+Identidades fictícias (talvez de NPCs).
+
+Se quiser, posso detalhar alguma tabela específica ou te ajudar a fazer consultas SQL nelas. 🚀
+
+
+
+
+
+
+
+
+
+
