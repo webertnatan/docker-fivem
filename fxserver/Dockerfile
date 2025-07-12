@@ -29,5 +29,6 @@ RUN sed -i 's/bash/sh/g' /srv/run.sh
 
 EXPOSE 30120/tcp
 EXPOSE 30120/udp
+EXPOSE 40120/udp
 
 CMD ["./run.sh"]
