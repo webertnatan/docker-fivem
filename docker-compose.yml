@@ -9,7 +9,7 @@ services:
       - "80:80"
     volumes:
       - ./apache/html:/usr/local/apache2/htdocs/
-      #- ./apache/conf/httpd.conf:/usr/local/apache2/conf/httpd.conf:ro
+      - ./apache/conf/httpd.conf:/usr/local/apache2/conf/httpd.conf:ro
     networks:
       - fivemnet
 
@@ -50,7 +50,7 @@ services:
       - ./fxserver/cache:/srv/cache
       - ./fxserver/config:/srv/config
       - ./cfx-server:/srv/alpine/opt/cfx-server
-      - ./txData:/opt/cfx-server/txData
+      #- ./txData:/opt/cfx-server/txData
     ports:
       - "30120:30120/tcp"
       - "30120:30120/udp"

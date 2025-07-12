@@ -29,3 +29,4 @@ sql/*.sql
 # Ignorar arquivos específicos que não são config
 fxserver/start.bat
 fxserver/imgui.ini
+.env
