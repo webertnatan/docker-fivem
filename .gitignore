@@ -1,0 +1,31 @@
+# Ignorar arquivos binários e libs pesadas
+cfx-server/
+fxserver/lib*.so
+fxserver/FXServer
+fxserver/ld-musl-x86_64.so.1
+fxserver/libnode*.so
+
+# Ignorar cache, artifacts, dados runtime, logs e backups
+cache/
+artifacts/
+backup/
+txData/
+apache/htdocs/
+
+# Ignorar arquivos de banco exportados grandes
+sql/*.sql
+# (Se quiser manter o arquivo SQL de criação, coloque uma exceção:)
+!sql/creawork.sql
+
+# Ignorar arquivos temporários, logs, e editor
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+.DS_Store
+.replxx_history
+
+# Ignorar arquivos específicos que não são config
+fxserver/start.bat
+fxserver/imgui.ini

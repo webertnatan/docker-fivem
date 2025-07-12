@@ -1,1 +1,0 @@
-artifacts\FXServer.exe +set gamename gta5 +set onesync_enableInfinity 1 +exec config.cfg
