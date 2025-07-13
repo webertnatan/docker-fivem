@@ -30,4 +30,6 @@ sql/*.sql
 fxserver/start.bat
 fxserver/imgui.ini
 fxserver/doc\ server/
+fxserver/doc server/[Celular]
+
 .env
