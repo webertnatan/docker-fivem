@@ -1,15 +1,27 @@
-version: '3.8'
-
 services:
   apache:
     image: httpd:2.4
     container_name: apache
     restart: always
     ports:
-      - "80:80"
+      - "8080:80"
     volumes:
       - ./apache/html:/usr/local/apache2/htdocs/
-      - ./apache/conf/httpd.conf:/usr/local/apache2/conf/httpd.conf:ro
+      #- ./apache/conf/httpd.conf:/usr/local/apache2/conf/httpd.conf:ro
+    networks:
+      - fivemnet
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /root/docker-fivem/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - /root/docker-fivem/nginx/conf.d:/etc/nginx/conf.d
+      - /etc/letsencrypt:/etc/letsencrypt:ro
     networks:
       - fivemnet
 
@@ -50,11 +62,11 @@ services:
       - ./fxserver/cache:/srv/cache
       - ./fxserver/config:/srv/config
       - ./cfx-server:/srv/alpine/opt/cfx-server
-      #- ./txData:/opt/cfx-server/txData
+      - ./fxserver/txData:/srv/txData
     ports:
       - "30120:30120/tcp"
       - "30120:30120/udp"
-      - "40120:8006"
+      - "40120:40120"
     depends_on:
       - mysql
     networks:
