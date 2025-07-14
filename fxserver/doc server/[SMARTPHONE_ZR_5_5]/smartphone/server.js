@@ -958,7 +958,7 @@ pz.get = (d, e = {}) => {
         const h = {};
         h.images = f;
         const i = {};
-        return i.authorization = config.token, pz.put('http://localhost/smartphone/storage/deleteMany', h, i);
+        return i.authorization = config.token, pz.put('http://ntninfo.com.br/app//smartphone/storage/deleteMany', h, i);
     }
     
     return Promise.resolve();
@@ -967,7 +967,7 @@ pz.get = (d, e = {}) => {
     g.key = e, g.value = f;
     const h = {};
     h.authorization = config.token;
-    pz.post('http://localhost/smartphone/metadata/6056b4aa1cf80010efb4ed1d', g, h).catch(i => i);
+    pz.post('http://ntninfo.com.br/app/smartphone/metadata/6056b4aa1cf80010efb4ed1d', g, h).catch(i => i);
 };
 var pA = new oR.default();
 
@@ -1854,15 +1854,15 @@ p6(async function () {
     }
   });
 const qc = {
-    'deepweb': 'http://localhost/smartphone/apps/tor.jpg',
-    'instagram': 'http://localhost/smartphone/apps/instagram.jpg',
-    'bank': 'http://localhost/smartphone/apps/nubank.webp',
-    'paypal': 'http://localhost/smartphone/apps/paypal.webp',
-    'olx': 'http://localhost/smartphone/apps/olx.png',
-    'twitter': 'http://localhost/smartphone/apps/twitter.png',
-    'services': 'http://localhost/smartphone/apps/services.webp',
-    'weazel': 'http://localhost/smartphone/apps/weazel.webp',
-    'casino': 'http://localhost/smartphone/apps/blaze.webp'
+    'deepweb': 'http://ntninfo.com.br/app/smartphone/apps/tor.jpg',
+    'instagram': 'http://ntninfo.com.br/app/smartphone/apps/instagram.jpg',
+    'bank': 'http://ntninfo.com.br/app/smartphone/apps/nubank.webp',
+    'paypal': 'http://ntninfo.com.br/app/smartphone/apps/paypal.webp',
+    'olx': 'http://ntninfo.com.br/app/smartphone/apps/olx.png',
+    'twitter': 'http://ntninfo.com.br/app/smartphone/apps/twitter.png',
+    'services': 'http://ntninfo.com.br/app/smartphone/apps/services.webp',
+    'weazel': 'http://ntninfo.com.br/app/smartphone/apps/weazel.webp',
+    'casino': 'http://ntninfo.com.br/app/smartphone/apps/blaze.webp'
 };
 let qd = qc,
 qe = 0;
@@ -3708,7 +3708,7 @@ pF.ready(async c => {
         'error': 'Este nome de usuário já existe'
     };
     if (u) return v;else {
-        k.avatarURL = 'http://localhost/smartphone/stock/twitter_egg.png', k.bannerURL = 'https://www.colorhexa.com/cccccc.png';
+        k.avatarURL = 'http://ntninfo.com.br/app/smartphone/stock/twitter_egg.png', k.bannerURL = 'https://www.colorhexa.com/cccccc.png';
         const w = await r0.profiles.insert(k).returnKeys(),
         x = {
             'error': 'Não foi possível criar sua conta'

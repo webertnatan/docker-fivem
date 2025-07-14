@@ -22,7 +22,7 @@ if (empty($_FILES['video'])) {
 $input = $_FILES['video']['tmp_name'];
 $filename = time() . '.webm';
 $output = "./videos/" . $filename;
-$videoUrl = "http://localhost/smartphone/storage/videos/" . $filename;
+$videoUrl = "http://ntninfo.com.br/app/smartphone/storage/videos/" . $filename;
 
 if (move_uploaded_file($input, $output)) {
     $response = [

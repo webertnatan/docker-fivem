@@ -1,23 +1,23 @@
-# Ignorar arquivos binários e libs pesadas
+# Ignorar binários, bibliotecas nativas e arquivos grandes da build
 cfx-server/
 fxserver/lib*.so
 fxserver/FXServer
 fxserver/ld-musl-x86_64.so.1
 fxserver/libnode*.so
 
-# Ignorar cache, artifacts, dados runtime, logs e backups
-cache/
+# Ignorar cache, dados de runtime, arquivos de deploy e backups
+fxserver/cache/
+fxserver/txData/
 artifacts/
 backup/
-txData/
+cache/
 apache/htdocs/
 
-# Ignorar arquivos de banco exportados grandes
+# Ignorar arquivos de banco exportados, exceto SQL de criação
 sql/*.sql
-# (Se quiser manter o arquivo SQL de criação, coloque uma exceção:)
 !sql/creawork.sql
 
-# Ignorar arquivos temporários, logs, e editor
+# Ignorar arquivos temporários e logs
 *.log
 *.tmp
 *.bak
@@ -26,10 +26,16 @@ sql/*.sql
 .DS_Store
 .replxx_history
 
-# Ignorar arquivos específicos que não são config
+# Ignorar arquivos e configs não essenciais
+.env
 fxserver/start.bat
 fxserver/imgui.ini
-fxserver/doc\ server/
-fxserver/doc server/[Celular]
 
-.env
+# Ignorar pastas com nomes contendo espaços ou caracteres especiais
+"fxserver/doc server/"
+"fxserver/doc server/[Celular]"
+
+# Ignorar arquivos do VS Code e IDEs (opcional)
+.vscode/
+.idea/
+*.code-workspace
