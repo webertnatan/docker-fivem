@@ -27,7 +27,9 @@ echo "Restaurando banco de dados creawork (ignorando duplicados)..."
 docker exec -i mysql mysql -u root -proot creawork < /root/docker-fivem/backup/sql/creawork.sql
 
 echo "Subindo Apache e FiveM..."
-docker compose up -d apache fivem nginx
+docker compose up -d apache fivem drone nginx 
 
 echo "Tudo subido. Monitorando logs do FiveM (Ctrl+C para sair)..."
 docker compose logs -f
+
+echo "✅ Deploy concluído!"
