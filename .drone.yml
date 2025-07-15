@@ -12,11 +12,11 @@ steps:
   - name: Deploy na VPS via SSH
     image: appleboy/drone-ssh
     settings:
-      host: ntninfo.com.br.vps.yousecure.io    # Substitua pelo IP da sua VPS
-      username: root                     # Ou "gitops", se usar outro usuário
+      host: ntninfo.com.br.vps.yousecure.io
+      username: root
       port: 2277
-      key:
-        from_secret: fivem-secret # Adicione no painel do DroneCI
+      ssh_key:
+        from_secret: fivem-secret
       script:
         - cd /root/docker-fivem
         - chmod +x script.sh
