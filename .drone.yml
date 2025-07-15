@@ -3,15 +3,16 @@ type: docker
 name: deploy
 
 steps:
-  - name: Deploy na VPS via SSH
+  - name: Deploy via SSH
     image: appleboy/drone-ssh
     settings:
-      host: ntninfo.com.br.vps.yousecure.io
-      username: root
+      host:
+        from_secret: deploy_host
+      username:
+        from_secret: deploy_user
       port: 2277
       ssh_key:
-        from_secret: fivem-secret
+        from_secret: deploy_key
       script:
         - cd /root/docker-fivem
-        - chmod +x start.sh
         - ./start.sh
