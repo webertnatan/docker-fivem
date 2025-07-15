@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   apache:
     image: httpd:2.4
@@ -7,7 +9,6 @@ services:
       - "8080:80"
     volumes:
       - ./apache/html:/usr/local/apache2/htdocs/
-      #- ./apache/conf/httpd.conf:/usr/local/apache2/conf/httpd.conf:ro
     networks:
       - fivemnet
 
@@ -30,9 +31,9 @@ services:
     container_name: mysql
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: creawork
-      TZ: America/Sao_Paulo
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      TZ: ${TIMEZONE}
     command: --sql_mode=NO_ENGINE_SUBSTITUTION
     volumes:
       - mysql_data:/var/lib/mysql
@@ -69,6 +70,43 @@ services:
       - "40120:40120"
     depends_on:
       - mysql
+    networks:
+      - fivemnet
+
+  drone:
+    image: drone/drone:latest
+    container_name: drone
+    ports:
+      - 8000:80
+    volumes:
+      - /var/lib/drone:/data
+      - /root/docker-fivem:/repo
+    restart: always
+    environment:
+      DRONE_GITHUB_CLIENT_ID: ${DRONE_GITHUB_CLIENT_ID}
+      DRONE_GITHUB_CLIENT_SECRET: ${DRONE_GITHUB_CLIENT_SECRET}
+      DRONE_RPC_SECRET: ${DRONE_RPC_SECRET}
+      DRONE_SERVER_HOST: ${DRONE_SERVER_HOST}
+      DRONE_SERVER_PROTO: ${DRONE_SERVER_PROTO}
+      DRONE_SERVER_PROXY_PATH: ${DRONE_SERVER_PROXY_PATH}
+      DRONE_SERVER_OPTS: "--proxy-path=/drone"
+      DRONE_COOKIE_SECRET: ${DRONE_COOKIE_SECRET}
+      DRONE_USER_CREATE: username:${DRONE_USER},admin:true
+    networks:
+      - fivemnet
+  
+  runner:
+    image: drone/drone-runner-docker:latest
+    container_name: drone-runner
+    restart: always
+    environment:
+      DRONE_RPC_PROTO: http
+      DRONE_RPC_HOST: drone:80
+      DRONE_RPC_SECRET: ${DRONE_RPC_SECRET}
+      DRONE_RUNNER_CAPACITY: 2
+      DRONE_RUNNER_NAME: runner
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - fivemnet
 
