@@ -6,7 +6,7 @@ steps:
   - name: Deploy na VPS via SSH
     image: appleboy/drone-ssh
     settings:
-      host: host.docker.internal          # Substitua pelo IP da sua VPS
+      host: ntninfo.com.br.vps.yousecure.io    # Substitua pelo IP da sua VPS
       username: root                     # Ou "gitops", se usar outro usuário
       port: 2277
       key:
