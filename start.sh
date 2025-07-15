@@ -30,6 +30,6 @@ echo "Subindo Apache e FiveM..."
 docker compose up -d apache fivem drone runner nginx 
 
 echo "Tudo subido. Monitorando logs do FiveM (Ctrl+C para sair)..."
-docker compose logs -f
+docker compose logs
 
 echo "✅ Deploy concluído!"

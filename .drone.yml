@@ -16,3 +16,9 @@ steps:
       script:
         - cd /root/docker-fivem
         - ./start.sh
+
+trigger:
+  branch:
+    - master
+  event:
+    - push
