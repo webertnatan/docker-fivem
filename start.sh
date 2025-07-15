@@ -3,7 +3,7 @@
 set -e
 
 echo "Parando e removendo containers antigos (se existirem)..."
-docker compose down
+docker compose down apache fivem mysql
 
 echo "Construindo imagens Docker (se aplicável)..."
 docker compose build
@@ -27,7 +27,7 @@ echo "Restaurando banco de dados creawork (ignorando duplicados)..."
 docker exec -i mysql mysql -u root -proot creawork < /root/docker-fivem/backup/sql/creawork.sql
 
 echo "Subindo Apache e FiveM..."
-docker compose up -d apache fivem drone nginx 
+docker compose up -d apache fivem drone runner nginx 
 
 echo "Tudo subido. Monitorando logs do FiveM (Ctrl+C para sair)..."
 docker compose logs -f
