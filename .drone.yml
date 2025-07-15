@@ -1,0 +1,32 @@
+kind: pipeline
+type: docker
+name: deploy-e-commit
+
+steps:
+  - name: deploy-e-commit-no-servidor
+    image: alpine/git
+    volumes:
+      - name: repo-local
+        path: /repo
+    environment:
+      SSH_PRIVATE_KEY:
+        from_secret: fivem-secret
+    commands:
+      - apk add --no-cache openssh
+      - mkdir -p ~/.ssh
+      - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+      - chmod 600 ~/.ssh/id_rsa
+      - ssh-keyscan github.com >> ~/.ssh/known_hosts
+      - git config --global user.name "Drone CI"
+      - git config --global user.email "drone@example.com"
+      - cd /repo
+      - chmod +x script.sh
+      - ./script.sh
+      - git add .
+      - git commit -m "Deploy automático via Drone" || echo "Sem alterações"
+      - git push origin main
+
+volumes:
+  - name: repo-local
+    host:
+      path: /root/docker-fivem
