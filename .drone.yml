@@ -12,7 +12,7 @@ steps:
         from_secret: deploy_user
       port: 2277
       ssh_key:
-        from_secret: deploy_key
+        from_secret: fivem-secret
       script:
         - cd /root/docker-fivem
         - ./start.sh
