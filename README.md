@@ -1,114 +1,133 @@
 # 🚓 Projeto Docker FiveM
 
-Este projeto tem como objetivo configurar e executar um servidor [FiveM](https://fivem.net/) em um ambiente Docker. Ele foi desenvolvido para facilitar o deploy local e remoto de servidores de roleplay ou testes baseados na plataforma GTA V.
+Este projeto tem como objetivo facilitar o deploy de um servidor [FiveM](https://fivem.net/) com Docker, incluindo serviços de Apache, MySQL, Nginx e CI com Drone CI. Ideal para servidores de roleplay ou ambientes de teste baseados em GTA V.
 
-## 📦 Requisitos
+---
 
-Antes de começar, você precisará ter instalado:
+## 📁 Estrutura do Projeto
 
-- [Git](https://git-scm.com/)
-- [Docker](https://www.docker.com/)
-- [Docker Compose](https://docs.docker.com/compose/)
-- Acesso SSH (se for clonar a partir de uma VPS)
-
-## 🗂️ Estrutura do Projeto
-
-```bash
+```
 docker-fivem/
-├── fxserver/                  # Arquivos do servidor FiveM (recursos, configs etc.)
-├── apache/                    # Configuração opcional de servidor web (Apache)
-├── mysql/                     # Banco de dados usado pelo servidor (por exemplo, para usuários)
-├── scripts/                   # Scripts de automação (backup, deploy, etc.)
-├── logs/                      # Logs da aplicação
-├── .env                       # Arquivo de variáveis de ambiente
-├── .gitignore                 # Arquivos/pastas ignorados pelo Git
-├── docker-compose.yml         # Orquestração dos serviços Docker
-└── README.md                  # Documentação do projeto
+├── apache/             # Configuração do Apache (porta 8080)
+├── backup/             # Backup do banco de dados (ex: .sql)
+├── cfx-server/         # Binários e dados do FiveM
+├── fxserver/           # Configs e recursos do servidor FiveM
+├── nginx/              # Configurações do Nginx (reverse proxy, HTTPS)
+├── .env                # Variáveis de ambiente
+├── .drone.yml          # Pipeline CI para Drone
+├── .gitignore
+├── docker-compose.yml  # Orquestração dos containers
+├── start.sh            # Script automatizado de build, restore e deploy
+└── README.md           # Este arquivo
 ```
 
-## ⚙️ Configuração de ambiente (`.env`)
+---
 
-Crie um arquivo `.env` na raiz do projeto com as seguintes variáveis (exemplo):
+## ⚙️ Pré-requisitos
+
+- Docker & Docker Compose
+- Git
+- Acesso root ou permissões Docker
+- Chaves de acesso (API do GitHub, licença FiveM, etc.)
+
+---
+
+## 🔧 Variáveis `.env`
+
+Exemplo:
 
 ```env
-FXSERVER_PORT=30120
 MYSQL_ROOT_PASSWORD=root
 MYSQL_DATABASE=fivem
 MYSQL_USER=fivemuser
 MYSQL_PASSWORD=strongpassword
+TIMEZONE=America/Sao_Paulo
+
+steamKey=SUA_STEAM_KEY
+licenseKey=SUA_LICENSE_KEY
+
+DRONE_GITHUB_CLIENT_ID=seu_client_id
+DRONE_GITHUB_CLIENT_SECRET=seu_client_secret
+DRONE_RPC_SECRET=secreto
+DRONE_SERVER_HOST=drone.seudominio.com
+DRONE_SERVER_PROTO=https
+DRONE_SERVER_PROXY_PATH=/drone
+DRONE_COOKIE_SECRET=seu_cookie
+DRONE_USER=admin
 ```
 
-## 🚀 Comandos Docker
+---
 
-### Subir os containers
+## 🚀 Como usar
+
+### Inicializar o servidor
 
 ```bash
-docker compose up -d
+chmod +x start.sh
+./start.sh
 ```
 
-### Parar os containers
+Esse script faz:
+
+1. Build dos containers
+2. Importação do dump SQL (`backup/sql/creawork.sql`)
+3. Subida dos serviços (`mysql`, `apache`, `fivem`, `drone`, `runner`, `nginx`)
+4. Exibe os logs ao final
+
+### Comandos úteis
 
 ```bash
-docker compose down
+docker compose up -d         # Subir containers
+docker compose down          # Derrubar containers
+docker compose logs -f       # Ver logs em tempo real
+docker compose build         # Rebuild das imagens
 ```
 
-### Ver logs do servidor
+---
 
-```bash
-docker compose logs -f
-```
+## 🧪 CI/CD com Drone
 
-## 🧪 Uso do Git
+Este projeto inclui Drone CI:
 
-### 1. Clonar o repositório
+- `/drone` como path base
+- Runner configurado
+- Montagem do repositório como `/repo`
 
-```bash
-git clone git@github.com:webertnatan/docker-fivem.git
-cd docker-fivem
-```
+Configure seus segredos no painel da Drone para evitar exposição de variáveis sensíveis.
 
-### 2. Adicionar e commitar alterações
+---
 
-```bash
-git add .
-git commit -m "Descrição do que foi feito"
-```
+## 🛠️ Scripts
 
-### 3. Enviar alterações (push)
+- **start.sh**: automatiza todo o processo de deploy
+- Inclui restauração automática do banco `creawork` com `INSERT IGNORE`
 
-```bash
-git push origin master
-```
+---
 
-Se for o primeiro push:
+## 🧠 Dicas
 
-```bash
-git push --set-upstream origin master
-```
+- O diretório `fxserver/resources` deve conter seus scripts, mods e configs.
+- Certifique-se de que o Nginx possui os certificados válidos em `/etc/letsencrypt`.
 
-### 4. Atualizar repositório local (pull)
+---
 
-```bash
-git pull
-```
+## 🤝 Contribuindo
 
-## ✍️ Contribuindo
-
-Contribuições são bem-vindas!
-
-1. Faça um fork do projeto
+1. Fork o repositório
 2. Crie uma branch: `git checkout -b minha-feature`
-3. Faça commit das suas mudanças: `git commit -m 'feat: nova funcionalidade'`
-4. Faça push para a branch: `git push origin minha-feature`
+3. Commit: `git commit -m "feat: minha feature"`
+4. Push: `git push origin minha-feature`
 5. Abra um Pull Request
 
-## 🛡️ Licença
+---
 
-Este projeto está licenciado sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+## 📄 Licença
 
-## 🤝 Contato
+Este projeto está licenciado sob a [MIT License](LICENSE).
 
-Para dúvidas ou suporte:
+---
+
+## 📬 Contato
 
 - GitHub: [@webertnatan](https://github.com/webertnatan)
 - Email: seu-email@example.com
