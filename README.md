@@ -130,6 +130,6 @@ Este projeto está licenciado sob a [MIT License](LICENSE).
 ## 📬 Contato
 
 - GitHub: [@webertnatan](https://github.com/webertnatan)
-- Email: seu-email@example.com
+- Email: webertnatan2@gmail.com
 
 **Feito com 💙 para a comunidade FiveM**
