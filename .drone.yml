@@ -2,10 +2,6 @@ kind: pipeline
 type: docker
 name: deploy
 
-trigger:
-  event:
-    - push
-
 steps:
   - name: Deploy via SSH
     image: appleboy/drone-ssh
