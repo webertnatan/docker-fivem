@@ -131,6 +131,10 @@ Este projeto está licenciado sob a [MIT License](LICENSE).
 
 - GitHub: [@webertnatan](https://github.com/webertnatan)
 - Email: webertnatan2@gmail.com
+<<<<<<< HEAD
 - Email: moises89507@gmail.com
+=======
+- Email: moiseslima89507@gmail.com
+>>>>>>> 26ed40f787ca3dffc8220c52a586a2851004bd2d
 
 **Feito com 💙 para a comunidade FiveM**
